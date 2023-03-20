@@ -32,7 +32,7 @@ pdf("overlap_all_comp.pdf")
 plot(data_overlap$overlap,data_overlap$Dstatistic,pch=19,xlab = "Overlap",ylab="D statistic")
 model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),3),"; p =",round(as.numeric( (summary(model)$coefficients[8])),3)))
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 dev.off()
 
 #Pearson's product-moment correlation
