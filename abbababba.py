@@ -1,4 +1,5 @@
 #module load Dsuite
+
 import os, filecmp
 
 #record all pops asnd all inds
@@ -12,7 +13,7 @@ with open("popmap.txt") as f:
 		inds.append(line.split()[0])
 
 comps=set()
-with open("sets.txt") as f:
+with open("sets2.txt") as f:
 	for line in f:
 		if not line.startswith("comp"):
 			comp_num,sp1,sp2,sp3,outgroup,typecomp=line.strip().split()
@@ -47,14 +48,13 @@ assert int(comp_num)==len(comps) # all comps are different?
 
 
 import os
-os.system("head -n 1 comp1/sets_BBAA.txt > summary_BBAA.txt" )
+os.system("head -n 1 comp1/sets_BBAA.txt > summary_BBAA2.txt" )
 for i in range(1,len(comps)+1):
 	print(i)
 	os.system("tail -n 1 comp"+str(i)+"/sets_BBAA.txt >>  summary_BBAA.txt" )
 
-os.system("paste sets.txt summary_BBAA.txt > allBBAA.txt")
+os.system("paste sets2.txt summary_BBAA2.txt > allBBAA2.txt")
 
-#13 and 15 Dmin are different for sets.txt
 #12 and 15, 18  Dmin are different for sets2.txt
 
 #or the first, in a file with the “BBAA.txt” suffix, Dtrios attempts to infer the population or species relationships: it orders each trio assuming that the correct tree is the one where the BBAA pattern is more common than the discordant ABBA and BABA patterns, which are assumed to result from incomplete lineage sorting or from introgression. The second type of output is the Dmin score, the minimum D for each trio regardless of any assumptions about the tree topology. There is no attempt to infer the true tree; instead, the trio is ordered so that the difference between nABBA and nBABA is minimized. This output is in a file with the “Dmin.txt” suffix and can be used to set a lower bound on the amount of “nontreeness” in the data set when the true phylogeny is uncertain, as in Malinsky et al. (2018). 
