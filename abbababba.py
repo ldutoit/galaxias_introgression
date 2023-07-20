@@ -53,7 +53,7 @@ for i in range(1,len(comps)+1):
 	print(i)
 	os.system("tail -n 1 comp"+str(i)+"/sets_BBAA.txt >>  summary_BBAA.txt" )
 
-os.system("paste sets2.txt summary_BBAA2.txt > allBBAA2.txt")
+os.system("paste sets2.txt summary_BBAA.txt > allBBAA2.txt")
 
 #12 and 15, 18  Dmin are different for sets2.txt
 
