@@ -12,7 +12,7 @@ with open("popmap.txt") as f:
 		inds.append(line.split()[0])
 
 comps=set()
-with open("sets2.txt") as f:
+with open("sets.txt") as f:
 	for line in f:
 		if not line.startswith("comp"):
 			comp_num,sp1,sp2,sp3,outgroup,typecomp=line.strip().split()
@@ -47,12 +47,12 @@ assert int(comp_num)==len(comps) # all comps are different?
 
 
 import os
-os.system("head -n 1 comp1/sets_BBAA.txt > summary_BBAA2.txt" )
+os.system("head -n 1 comp1/sets_BBAA.txt > summary_BBAA.txt" )
 for i in range(1,len(comps)+1):
 	print(i)
-	os.system("tail -n 1 comp"+str(i)+"/sets_BBAA.txt >>  summary_BBAA2.txt" )
+	os.system("tail -n 1 comp"+str(i)+"/sets_BBAA.txt >>  summary_BBAA.txt" )
 
-os.system("paste sets2.txt summary_BBAA2.txt > allBBAA2.txt")
+os.system("paste sets.txt summary_BBAA.txt > allBBAA.txt")
 
 #13 and 15 Dmin are different for sets.txt
 #12 and 15, 18  Dmin are different for sets2.txt
