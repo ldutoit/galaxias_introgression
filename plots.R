@@ -129,22 +129,33 @@ cor.test(data$Dp,data$Dstatistic)
 
 
 data_overlap<-read.table("~/Desktop/allBBAA.j.txt",h=T)
-pdf("overlap_all_comp.pdf")
-plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="D statistic")
-model<- lm(data_overlap$Dstatistic~data_overlap$Dp)
+pdf("overlap_all_compdp.pdf")
+plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="Dp ")
+model<- lm(data$Dp~data_overlap$overlap)
 abline(model) 
 legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 dev.off()
-summary(lm(data_overlap$Dstatistic~data$Dp))
+summary(model)
+
 
 
 #
-#data_overlap<-read.table("~/Desktop/allBBAA.j.txt",h=T)
-#pdf("overlap_all_comp.pdf")
-#plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="D statistic")
-#model<- lm(data_overlap$Dstatistic~data$Dp)
-#abline(model) 
-#legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
-#dev.off()
-#summary(lm(data_overlap$Dstatistic~data$Dp))#
+#Call:
+#lm(formula = data$Dp ~ data_overlap$overlap)#
+
+#Residuals:
+#      Min        1Q    Median        3Q       Max 
+#-0.039447 -0.024751  0.000398  0.019209  0.043894 #
+
+#Coefficients:
+#                     Estimate Std. Error t value Pr(>|t|)   
+#(Intercept)          0.028232   0.009766   2.891  0.01263 * 
+#data_overlap$overlap 0.013651   0.003987   3.424  0.00453 **
+#---
+#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1#
+
+#Residual standard error: 0.02673 on 13 degrees of freedom
+#Multiple R-squared:  0.4742,	Adjusted R-squared:  0.4337 
+#F-statistic: 11.72 on 1 and 13 DF,  p-value: 0.00453
+
 write.table(data,"BBAAwithDp.txt",quote=F,row.names=F,sep="\t")
