@@ -18,11 +18,11 @@ W = 4, p-value = 0.09524
 
 
 wilcox.test(data$Dstatistic[1:5],(data$Dstatistic[11:15])) # sympatry vs allopatry
-W = 22, p-value = 0.05556
+#W = 22, p-value = 0.05556
 
 
 wilcox.test(data$Dstatistic[1:10],(data$Dstatistic[11:15])) # past contact and sympatry V allopatry
-W = 43, p-value = 0.02797
+#W = 43, p-value = 0.02797
 
 
 ###With overlaps measurements from Jon
@@ -34,36 +34,37 @@ model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
 abline(model) 
 legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 dev.off()
-
-#Pearson's product-moment correlation
-#
-#data:  data_overlap$overlap and data_overlap$Dstatistic
-#t = 2.5437, df = 13, p-value = 0.02448
-#alternative hypothesis: true correlation is not equal to 0
-#95 percent confidence interval:
-#0.09111036 0.84052206
-#sample estimates:
-#cor 0.576468 
+pdf("overlap_all_comp_f4.pdf")
+plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="f4")
+model<- lm(data_overlap$f4~data_overlap$overlap)
+abline(model) 
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+dev.off()
 
 summary(lm(data_overlap$Dstatistic~data_overlap$overlap))
 
-
 #Call:
-#  lm(formula = data_overlap$Dstatistic ~ data_overlap$overlap)#
+#  lm(formula = data_overlap$Dstatistic ~ data_overlap$overlap)
 
 #Residuals:
-#  Min       1Q   Median       3Q      Max 
-#-0.13797 -0.03280 -0.00567  0.05191  0.12767 #
+#  Min        1Q    Median        3Q       Max 
+#-0.140515 -0.065320  0.001245  0.054092  0.144044 
 
 #Coefficients:
-#  Estimate Std. Error t value Pr(>|t|)    
-#(Intercept)           0.14073    0.03164   4.448 0.000657 ***
-#  data_overlap$overlap  0.03286    0.01292   2.544 0.024484 *  
+#  Estimate Std. Error t value Pr(>|t|)   
+#(Intercept)           0.12436    0.03405   3.652  0.00292 **
+#  data_overlap$overlap  0.03759    0.01390   2.704  0.01805 * 
 #  ---
-#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1#
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-#Residual standard error: 0.08659 on 13 degrees of freedom
-#Multiple R-squared:  0.3323,	Adjusted R-squared:  0.281 
+#Residual standard error: 0.09317 on 13 degrees of freedom
+#Multiple R-squared:   0.36,	Adjusted R-squared:  0.3108 
+#F-statistic: 7.313 on 1 and 13 DF,  p-value: 0.01805
+
+
+
+
+
 #F-statistic:  6.47 on 1 and 13 DF,  p-value: 0.02448
 
 data_overlap<-data_overlap[-which(data_overlap$overlap==0),]
@@ -106,3 +107,43 @@ model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
 abline(model) 
 legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),3),"; p =",round(as.numeric( (summary(model)$coefficients[8])),3)))
 dev.off()
+
+### Add Dp
+
+data$Dp<-abs(data$ABBA-data$BABA)/(data$BBAA+data$ABBA+data$BABA)
+cor.test(data$Dp,data$Dstatistic)
+
+
+#
+#Pearson's product-moment correlation#
+
+#data:  data$Dp and data$Dstatistic
+#t = 8.3775, df = 13, p-value = 1.345e-06
+#alternative hypothesis: true correlation is not equal to 0
+#95 percent confidence interval:
+#0.7673364 0.9729822
+#sample estimates:
+#cor 
+#0.918541 
+
+
+
+data_overlap<-read.table("~/Desktop/allBBAA.j.txt",h=T)
+pdf("overlap_all_comp.pdf")
+plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="D statistic")
+model<- lm(data_overlap$Dstatistic~data_overlap$Dp)
+abline(model) 
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+dev.off()
+summary(lm(data_overlap$Dstatistic~data$Dp))
+
+
+#
+#data_overlap<-read.table("~/Desktop/allBBAA.j.txt",h=T)
+#pdf("overlap_all_comp.pdf")
+#plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="D statistic")
+#model<- lm(data_overlap$Dstatistic~data$Dp)
+#abline(model) 
+#legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+#dev.off()
+#summary(lm(data_overlap$Dstatistic~data$Dp))#
