@@ -147,3 +147,4 @@ summary(lm(data_overlap$Dstatistic~data$Dp))
 #legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 #dev.off()
 #summary(lm(data_overlap$Dstatistic~data$Dp))#
+write.table(data,"BBAAwithDp.txt",quote=F,row.names=F,sep="\t")
