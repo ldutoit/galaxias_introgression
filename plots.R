@@ -1,4 +1,7 @@
+library("ggplot2")
+library("ggthemes")
 data<-read.table("~/allBBAA2.txt",h=T)
+
 data<-data[-c(12,15,18),] # 13 15 for sets.txt, 12 15 for sets2.txt Those had a minimum D value not matching the trees, suggesting possible incongruence on the tree
 plot(data)
 colnames(data)
@@ -8,10 +11,12 @@ dev.off()
 
 pdf("~/Galaxiasintrogg.pdf")
 library("ggplot2")
-ggplot(data = data, mapping = aes(x =type , y = Dstatistic)) +
+myplot<-ggplot(data = data, mapping = aes(x =type , y = Dstatistic)) +
   geom_boxplot(alpha = 0) +
-  geom_jitter(alpha = 0.3, color = "tomato",pch=19,cex=4) +theme_bw()
-dev.off()
+  geom_jitter(alpha = 0.5, color = "tomato",pch=19,cex=4) 
+myplot + theme_bw() + theme( panel.grid.major = element_blank(),                            panel.grid.minor = element_blank())
+
+  dev.off()
 
 wilcox.test(data$Dstatistic[11:15],(data$Dstatistic[6:10])) # past contact vs allopatry
 W = 4, p-value = 0.09524
@@ -35,7 +40,7 @@ abline(model)
 legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 dev.off()
 pdf("overlap_all_comp_f4.pdf")
-plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="f4")
+plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="F4")
 model<- lm(data_overlap$f4~data_overlap$overlap)
 abline(model) 
 legend("topleft",paste("R2 =",round(as.numeric(summary(model)[8]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
@@ -139,23 +144,48 @@ summary(model)
 
 
 
-#
-#Call:
-#lm(formula = data$Dp ~ data_overlap$overlap)#
-
-#Residuals:
-#      Min        1Q    Median        3Q       Max 
-#-0.039447 -0.024751  0.000398  0.019209  0.043894 #
-
-#Coefficients:
-#                     Estimate Std. Error t value Pr(>|t|)   
-#(Intercept)          0.028232   0.009766   2.891  0.01263 * 
-#data_overlap$overlap 0.013651   0.003987   3.424  0.00453 **
-#---
-#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1#
-
-#Residual standard error: 0.02673 on 13 degrees of freedom
-#Multiple R-squared:  0.4742,	Adjusted R-squared:  0.4337 
-#F-statistic: 11.72 on 1 and 13 DF,  p-value: 0.00453
-
+#summary(lm(data_overlap$Dstatistic~data$Dp))#
 write.table(data,"BBAAwithDp.txt",quote=F,row.names=F,sep="\t")
+
+
+
+ggplot(mtcars, aes(x=wt, y=mpg)) +
+  geom_point(size=2, shape=23)
+
+
+# MAINFIGURES 
+##Figure 5
+data$type<-c("sympatry", "sympatry", "sympatry", "sympatry", "sympatry", "parapatry", "parapatry", "parapatry", "parapatry", "parapatry", "allopatry", "allopatry", "allopatry", "allopatry", "allopatry")
+pdf("~/Galaxiasintrogg.pdf")
+library("ggplot2")
+pdf("~/Galaxiasintrogg.pdf")
+myplot<-ggplot(data = data, mapping = aes(x =type , y = Dstatistic)) +
+  geom_boxplot(alpha = 0) +labs(y="D statistic",cex=5)+geom_jitter(alpha = 0.5, color = "tomato",pch=19,cex=4) 
+myplot + theme_bw() + theme( panel.grid.major = element_blank(),                            panel.grid.minor = element_blank(),axis.text=element_text(size=12),
+                             axis.title=element_text(size=14))
+
+dev.off()
+
+
+
+
+data_overlap<-read.table("~/Desktop/allBBAA.j.txt",h=T)
+data$Dp<-abs(data$ABBA-data$BABA)/(data$BBAA+data$ABBA+data$BABA)
+cor.test(data$Dp,data$Dstatistic)
+data_overlap$Dp<-data$Dp
+
+pdf("~/overlap_all_comp.pdf")
+
+
+myplot<-ggplot(data_overlap, aes(x=overlap, Dstatistic )) +
+  geom_point(color="orange",pch=19,cex=4,alpha=0.5)+
+  geom_smooth(method=lm, se=FALSE,
+              color="darkgrey")+labs(y="D statistic",cex=5)
+  
+myplot + theme_bw() + theme( panel.grid.major = element_blank(),                            panel.grid.minor = element_blank(),axis.text=element_text(size=12),
+                             axis.title=element_text(size=14)) 
+
+dev.off()
+
+
+
