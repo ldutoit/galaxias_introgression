@@ -6,7 +6,9 @@ Campbell, C. S.,  Waters, J. M., & Dutoit, L. (2023). Fish biogeography and hybr
 
 SNP calling were performed in a previous publication:
 
-Campbell, C. S., Dutoit, L., King, T. M., Craw, D., Burridge, C. P., Wallis, G. P., & Waters, J. M. (2022). Genome‐wide analysis resolves the radiation of New Zealand's freshwater Galaxias vulgaris complex and reveals a candidate species obscured by mitochondrial capture. Diversity and Distributions, 28(10), 2255-2267. [Dryad scripts] https://datadryad.org/stash/dataset/doi:10.5061/dryad.0k6djhb38 [Genomic data deposited at the Short Read Archive](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA869758)
+Campbell, C. S., Dutoit, L., King, T. M., Craw, D., Burridge, C. P., Wallis, G. P., & Waters, J. M. (2022). Genome‐wide analysis resolves the radiation of New Zealand's freshwater Galaxias vulgaris complex and reveals a candidate species obscured by mitochondrial capture. Diversity and Distributions, 28(10), 2255-2267. [Dryad scripts](https://datadryad.org/stash/dataset/doi:10.5061/dryad.0k6djhb38) [Genomic data deposited at the Short Read Archive](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA869758).
+
+Contact: dutoit.ludovic@gmail.com for any question.
 
 ### Scripts
 
