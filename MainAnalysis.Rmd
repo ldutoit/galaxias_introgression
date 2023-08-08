@@ -41,14 +41,23 @@ data_overlap<-read.table("allBBAA.j.txt",h=T)
 plot(data_overlap$overlap,data_overlap$Dstatistic,pch=19,xlab = "Overlap",ylab="D statistic")
 model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+R2=round(as.numeric(summary(model)[9]),2)
+p=round(as.numeric( (summary(model)$coefficients[8])),2)
+legend("topleft",legend=bquote(R^{2}  ~ "=" ~ .(R2) ~ "; p ="~ .(p)))
+summary(model)
+
 summary(lm(data_overlap$Dstatistic~data_overlap$overlap))
 
 ### f4
 plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="F4")
 model<- lm(data_overlap$f4~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+R2=round(as.numeric(summary(model)[9]),2)
+p=round(as.numeric( (summary(model)$coefficients[8])),2)
+legend("topleft",legend=bquote(R^{2}  ~ "=" ~ .(R2) ~ "; p ="~ .(p)))
+summary(model)
+
+
 summary(lm(data_overlap$f4~data_overlap$overlap))
 
 ```
@@ -67,7 +76,9 @@ data_overlap<-read.table("allBBAA.j.txt",h=T)
 plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="Dp ")
 model<- lm(data$Dp~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+R2=round(as.numeric(summary(model)[9]),2)
+p=round(as.numeric( (summary(model)$coefficients[8])),3)
+legend("topleft",legend=bquote(R^{2}  ~ "=" ~ .(R2) ~ "; p ="~ .(p)))
 summary(model)
 
 

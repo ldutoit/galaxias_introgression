@@ -73,10 +73,35 @@ data_overlap<-read.table("allBBAA.j.txt",h=T)
 plot(data_overlap$overlap,data_overlap$Dstatistic,pch=19,xlab = "Overlap",ylab="D statistic")
 model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+R2=round(as.numeric(summary(model)[9]),2)
+p=round(as.numeric( (summary(model)$coefficients[8])),2)
+legend("topleft",legend=bquote(R^{2}  ~ "=" ~ .(R2) ~ "; p ="~ .(p)))
 ```
 
 ![](MainAnalysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+summary(model)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = data_overlap$Dstatistic ~ data_overlap$overlap)
+    ## 
+    ## Residuals:
+    ##       Min        1Q    Median        3Q       Max 
+    ## -0.140515 -0.065320  0.001245  0.054092  0.144044 
+    ## 
+    ## Coefficients:
+    ##                      Estimate Std. Error t value Pr(>|t|)   
+    ## (Intercept)           0.12436    0.03405   3.652  0.00292 **
+    ## data_overlap$overlap  0.03759    0.01390   2.704  0.01805 * 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.09317 on 13 degrees of freedom
+    ## Multiple R-squared:   0.36,  Adjusted R-squared:  0.3108 
+    ## F-statistic: 7.313 on 1 and 13 DF,  p-value: 0.01805
 
 ``` r
 summary(lm(data_overlap$Dstatistic~data_overlap$overlap))
@@ -106,10 +131,35 @@ summary(lm(data_overlap$Dstatistic~data_overlap$overlap))
 plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="F4")
 model<- lm(data_overlap$f4~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+R2=round(as.numeric(summary(model)[9]),2)
+p=round(as.numeric( (summary(model)$coefficients[8])),2)
+legend("topleft",legend=bquote(R^{2}  ~ "=" ~ .(R2) ~ "; p ="~ .(p)))
 ```
 
 ![](MainAnalysis_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+
+``` r
+summary(model)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = data_overlap$f4 ~ data_overlap$overlap)
+    ## 
+    ## Residuals:
+    ##       Min        1Q    Median        3Q       Max 
+    ## -0.043446 -0.014212  0.000084  0.014867  0.043453 
+    ## 
+    ## Coefficients:
+    ##                      Estimate Std. Error t value Pr(>|t|)   
+    ## (Intercept)          0.028229   0.008980   3.143  0.00777 **
+    ## data_overlap$overlap 0.009290   0.003666   2.534  0.02493 * 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.02458 on 13 degrees of freedom
+    ## Multiple R-squared:  0.3306, Adjusted R-squared:  0.2792 
+    ## F-statistic: 6.422 on 1 and 13 DF,  p-value: 0.02493
 
 ``` r
 summary(lm(data_overlap$f4~data_overlap$overlap))
@@ -158,7 +208,9 @@ data_overlap<-read.table("allBBAA.j.txt",h=T)
 plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="Dp ")
 model<- lm(data$Dp~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
+R2=round(as.numeric(summary(model)[9]),2)
+p=round(as.numeric( (summary(model)$coefficients[8])),3)
+legend("topleft",legend=bquote(R^{2}  ~ "=" ~ .(R2) ~ "; p ="~ .(p)))
 ```
 
 ![](MainAnalysis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
