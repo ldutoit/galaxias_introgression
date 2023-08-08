@@ -13,7 +13,7 @@ Contact: dutoit.ludovic@gmail.com.
 ### Scripts
 
 - [abbababba.py](abbababba.py) This script effectively run the ABBA BABBA analysis. It takes the comparisons provided in the file [sets2.txt] and outputs the file [allBBAA2.txt](allBBAA2.txt) that contains all the D-statistics provided by [Dsuite](https://github.com/millanek/Dsuite).
-- [MainAnalysis.md](MainAnalysis.md) This file takes the output of Dsuite to calculate all correlations and plots the main figures. It also combines the Dp statistic and all data with geographical overlap. 
+- [MainAnalysis.md](MainAnalysis.md) This R script takes the output of Dsuite to calculate all correlations and plots the main figures. It also combines the Dp statistic and all data with geographical overlap. 
 
 ### Data files:
 
