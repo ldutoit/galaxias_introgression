@@ -2,7 +2,7 @@
 title: "Main analysis"
 author: 'Writen by: Ludo Dutoit'
 date: "8/9/2023"
-output: html_document
+output: github_document
 ---
 
 ## Load packages and data
@@ -41,14 +41,14 @@ data_overlap<-read.table("allBBAA.j.txt",h=T)
 plot(data_overlap$overlap,data_overlap$Dstatistic,pch=19,xlab = "Overlap",ylab="D statistic")
 model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[9])),2)))
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 summary(lm(data_overlap$Dstatistic~data_overlap$overlap))
 
 ### f4
 plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="F4")
 model<- lm(data_overlap$f4~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[9])),2)))
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 summary(lm(data_overlap$f4~data_overlap$overlap))
 
 ```
@@ -67,7 +67,7 @@ data_overlap<-read.table("allBBAA.j.txt",h=T)
 plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="Dp ")
 model<- lm(data$Dp~data_overlap$overlap)
 abline(model) 
-legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[9])),2)))
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[8])),2)))
 summary(model)
 
 
@@ -112,6 +112,7 @@ myplot<-ggplot(data_overlap, aes(x=overlap, Dstatistic )) +
   geom_smooth(method=lm, se=FALSE,
               color="darkgrey")+labs(y="D statistic",cex=5)
 
-myplot + theme_bw() + theme( panel.grid.major = element_blank(),                            panel.grid.minor = element_blank(),axis.text=element_text(size=12),
+myplot + theme_bw() + theme( panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),axis.text=element_text(size=12),
                              axis.title=element_text(size=14)) 
 ```
