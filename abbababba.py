@@ -1,8 +1,8 @@
-#module load Dsuite , make sure Dsuite is available
+#module load Dsuite, make sure Dsuite is available
 
 import os, filecmp
 
-#record all pops asnd all inds
+#record all pops and all inds
 pops =set()
 inds= []
 
@@ -42,7 +42,9 @@ with open("sets2.txt") as f:
 			#check both outputs are the same; if not, phylogenetic uncertainty or non-tree like history is inferred and comparison is excluded
 			if not filecmp.cmp(output_folder+'/sets_Dmin.txt', output_folder+'/sets_BBAA.txt'):
 				print("THE TWO OUTPUT FILES ARE DIFFERENT")
-			###parse_output
+				
+
+###parse_output
 # check all comps are different
 assert int(comp_num)==len(comps) # all comps are different?
 
