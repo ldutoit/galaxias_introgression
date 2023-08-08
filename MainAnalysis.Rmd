@@ -1,0 +1,117 @@
+---
+title: "Main analysis"
+author: 'Writen by: Ludo Dutoit'
+date: "8/9/2023"
+output: html_document
+---
+
+## Load packages and data
+
+```{r}
+
+
+library("ggplot2")
+library("ggthemes")
+data<-read.table("allBBAA2.txt",h=T)
+
+data<-data[-c(12,15,18),] # 12 15 and 18 for sets2.txt Those had a minimum D value not matching the trees, suggesting possible incongruence on the tree
+colnames(data)
+```
+
+
+##  D-statistic across comparison types
+
+```{r}
+myplot<-ggplot(data = data, mapping = aes(x =type , y = Dstatistic)) +
+  geom_boxplot(alpha = 0) +
+  geom_jitter(alpha = 0.5, color = "tomato",pch=19,cex=4) 
+myplot + theme_bw() + theme( panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+wilcox.test(data$Dstatistic[11:15],(data$Dstatistic[6:10])) # past contact vs allopatry
+wilcox.test(data$Dstatistic[1:5],(data$Dstatistic[11:15])) # sympatry vs allopatry
+wilcox.test(data$Dstatistic[1:10],(data$Dstatistic[11:15])) # past contact and sympatry  
+```
+
+## Include Geographic overlap 
+
+```{r}
+data_overlap<-read.table("allBBAA.j.txt",h=T)
+
+### D-statistic
+
+plot(data_overlap$overlap,data_overlap$Dstatistic,pch=19,xlab = "Overlap",ylab="D statistic")
+model<- lm(data_overlap$Dstatistic~data_overlap$overlap)
+abline(model) 
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[9])),2)))
+summary(lm(data_overlap$Dstatistic~data_overlap$overlap))
+
+### f4
+plot(data_overlap$overlap,data_overlap$f4,pch=19,xlab = "Overlap",ylab="F4")
+model<- lm(data_overlap$f4~data_overlap$overlap)
+abline(model) 
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[9])),2)))
+summary(lm(data_overlap$f4~data_overlap$overlap))
+
+```
+
+
+
+
+
+
+## Dp statistic
+
+```{r}
+data$Dp<-abs(data$ABBA-data$BABA)/(data$BBAA+data$ABBA+data$BABA)
+cor.test(data$Dp,data$Dstatistic)
+data_overlap<-read.table("allBBAA.j.txt",h=T)
+plot(data_overlap$overlap,data$Dp,pch=19,xlab = "Overlap",ylab="Dp ")
+model<- lm(data$Dp~data_overlap$overlap)
+abline(model) 
+legend("topleft",paste("R2 =",round(as.numeric(summary(model)[9]),2),"; p =",round(as.numeric( (summary(model)$coefficients[9])),2)))
+summary(model)
+
+
+
+#summary(lm(data_overlap$Dstatistic~data$Dp))#
+write.table(data,"BBAAwithDp.txt",quote=F,row.names=F,sep="\t")
+```
+
+
+
+## Main figures
+
+```{r}
+data$type<-c("sympatry", "sympatry", "sympatry", "sympatry", "sympatry", "parapatry", "parapatry", "parapatry", "parapatry", "parapatry", "allopatry", "allopatry", "allopatry", "allopatry", "allopatry")
+
+
+library("ggplot2")
+```
+
+### Figure 3
+```{r}
+
+myplot<-ggplot(data = data, mapping = aes(x =type , y = Dstatistic)) +
+  geom_boxplot(alpha = 0) +labs(y="D statistic",cex=5)+geom_jitter(alpha = 0.5, color = "tomato",pch=19,cex=4) 
+myplot + theme_bw() + theme( panel.grid.major = element_blank(),                            panel.grid.minor = element_blank(),axis.text=element_text(size=12),
+                             axis.title=element_text(size=14))
+```
+
+
+### Figure 6
+
+```{r}
+data_overlap<-read.table("allBBAA.j.txt",h=T)
+data$Dp<-abs(data$ABBA-data$BABA)/(data$BBAA+data$ABBA+data$BABA)
+cor.test(data$Dp,data$Dstatistic)
+data_overlap$Dp<-data$Dp
+
+
+
+myplot<-ggplot(data_overlap, aes(x=overlap, Dstatistic )) +
+  geom_point(color="orange",pch=19,cex=4,alpha=0.5)+
+  geom_smooth(method=lm, se=FALSE,
+              color="darkgrey")+labs(y="D statistic",cex=5)
+
+myplot + theme_bw() + theme( panel.grid.major = element_blank(),                            panel.grid.minor = element_blank(),axis.text=element_text(size=12),
+                             axis.title=element_text(size=14)) 
+```
