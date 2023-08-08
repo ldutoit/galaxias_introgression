@@ -13,13 +13,13 @@ Contact: dutoit.ludovic@gmail.com.
 ### Scripts
 
 - [abbababba.py](abbababba.py) This script effectively run the ABBA BABBA analysis. It takes the comparisons provided in the file [sets2.txt] and outputs the file [allBBAA2.txt](allBBAA2.txt) that contains all the D-statistics provided by [Dsuite](https://github.com/millanek/Dsuite).
-- [plots.R](plots.R) This file takes the output of Dsuite to calculate all correlations and plots the main figures. It also combines the Dp statistic and all data with geographical overlap. 
+- [MainAnalysis.md](MainAnalysis.md) This file takes the output of Dsuite to calculate all correlations and plots the main figures. It also combines the Dp statistic and all data with geographical overlap. 
 
 ### Data files:
 
-- [BBAAwithDp.txt](BBAAwithDp.txt): Combined output of Dsuite with computed Dp statistics. The output of  [plots.R](plots.R).
-- [allBBAA.j.txt](allBBAA.j.txt): Combined output of Dsuite with geographic overlap data. The output of  [plots.R](plots.R).
-- [allBBAA2.txt](allBBAA2.txt): Output of [abbababba.py](abbababba.py) and main input for [plots.R](plots.R)
+- [BBAAwithDp.txt](BBAAwithDp.txt): Combined output of Dsuite with computed Dp statistics. The output of  [MainAnalysis.md](MainAnalysis.md).
+- [allBBAA.j.txt](allBBAA.j.txt): Combined output of Dsuite with geographic overlap data. The output of  [MainAnalysis.md](MainAnalysis.md).
+- [allBBAA2.txt](allBBAA2.txt): Output of [abbababba.py](abbababba.py) and main input for [MainAnalysis.md](MainAnalysis.md)
 - [popmap.txt](popmap.txt): File matching samples and populations.
 - [sets2.txt](sets2.txt): List of all comparsions. Three comparisons were excluded (see paper).
 
